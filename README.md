@@ -36,7 +36,7 @@ include this snippet in your pom's dependencies.
 ```java
 /*
 * configure gitlab.
-* note : not tested against github, but could easyly be adapted.
+* note : not tested against github, but could easily be adapted.
 */
 ArchiGraphService s = new ArchiGraphService();
 s.config("https://my-gitlab-repo.org"

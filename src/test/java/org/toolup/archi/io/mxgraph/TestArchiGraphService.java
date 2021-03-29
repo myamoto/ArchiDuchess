@@ -1,9 +1,5 @@
 package org.toolup.archi.io.mxgraph;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.net.URISyntaxException;
-
 import org.toolup.archi.business.galerie.Gallery;
 import org.toolup.archi.business.galerie.Graph;
 import org.toolup.archi.business.galerie.Group;
