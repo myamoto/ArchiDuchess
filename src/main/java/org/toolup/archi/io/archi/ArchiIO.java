@@ -16,10 +16,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
-
 import org.toolup.archi.business.archimate.AbstractArchimateElement;
 import org.toolup.archi.business.archimate.ArchimateModel;
 import org.toolup.archi.business.archimate.ArchimateModelException;
@@ -31,11 +27,13 @@ import org.toolup.archi.business.archimate.view.AbstractChildElemView;
 import org.toolup.archi.business.archimate.view.BendPointElementView;
 import org.toolup.archi.business.archimate.view.ChildElementView;
 import org.toolup.archi.business.archimate.view.DiagramModelView;
-import org.toolup.archi.business.archimate.view.GroupElementView;
 import org.toolup.archi.business.archimate.view.IViewParent;
 import org.toolup.archi.business.archimate.view.NoteElementView;
 import org.toolup.archi.business.archimate.view.SourceConnectionElementView;
 import org.toolup.archi.io.archi.xmlparser.ModelParser;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 public class ArchiIO {
 

@@ -70,8 +70,11 @@ public class ArchiGraphService {
 					.progressMonitor(null)
 					.defaultMasterBranch("master");
 			gitRetriever.config(conf.getGitConf());
-			gitRetriever.checkout("master");
-			gitRetriever.pull();
+			gitRetriever.fetch();
+			gitRetriever.checkout();
+			if(!gitRetriever.getBehindCommits().isEmpty()) {
+				gitRetriever.pull();
+			}
 		}catch(GITSCMException e) {
 			throw new ArchiGraphException(e, 500);
 		}finally {
