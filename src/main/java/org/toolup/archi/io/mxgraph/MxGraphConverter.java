@@ -92,6 +92,7 @@ public class MxGraphConverter {
 				};
 			}
 		};
+		
 		BufferedImage image = mxCellRenderer.createBufferedImage(graphComponent.getGraph(), null, 1, Color.WHITE, graphComponent.isAntiAlias(), null, graphComponent.getCanvas());
 		mxPngEncodeParam param = mxPngEncodeParam.getDefaultEncodeParam(image);
 		param.setCompressedText(new String[] { "mxGraphModel", erXmlString });
@@ -253,7 +254,7 @@ public class MxGraphConverter {
 			setMXGraphCoordinnatesRecur(view.getChildList(), - minX + ipad, - minY + ipad);
 
 			List<IMxElemArchi> cells = writeChildrenRecur(view.getChildList(), wr);
-
+			cells.addAll(writeChildrenConnectionsRecur(view.getChildList(), wr));
 			List<Integer> ids = cells.stream()
 					.map(c -> {
 						List<Integer> res = new ArrayList<>();
@@ -316,6 +317,24 @@ public class MxGraphConverter {
 				result.addAll(writeChildrenRecur(((IViewParent)child).getChildList(), wr));
 		}
 
+//		for (AbstractChildElemView child : childList) {
+//			for (SourceConnectionElementView sourceCon: child.getSourceConList()) {
+//				IMxElemArchi mx = sourceCon.createMxGraphCell();
+//				if(mx == null) continue;
+//				result.add(mx);
+//				wr.write(mx.toXmlString());
+//			}
+//		}
+		return result;
+	}
+
+	private static List<IMxElemArchi> writeChildrenConnectionsRecur(List<AbstractChildElemView> childList, BufferedWriter wr) throws IOException, MxGraphConverterException {
+		List<IMxElemArchi> result = new ArrayList<>();
+		for(AbstractChildElemView child : childList) {
+			if(child instanceof IViewParent) 
+				result.addAll(writeChildrenConnectionsRecur(((IViewParent)child).getChildList(), wr));
+		}
+
 		for (AbstractChildElemView child : childList) {
 			for (SourceConnectionElementView sourceCon: child.getSourceConList()) {
 				IMxElemArchi mx = sourceCon.createMxGraphCell();
@@ -326,7 +345,7 @@ public class MxGraphConverter {
 		}
 		return result;
 	}
-
+	
 	private static <T> Set<T> findDuplicateBySetAdd(List<T> list) {
 		Set<T> items = new HashSet<>();
 		return list.stream()
